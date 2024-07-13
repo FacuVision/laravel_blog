@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
             $table->string("slug");
             $table->text("extract");
             $table->longText("body");
-            $table->enum("status",["1","2"]);
+            $table->enum("status",["1","2"])->default(1);
             //1 = borrador
             //2 = publicado
             $table->unsignedBigInteger("user_id");

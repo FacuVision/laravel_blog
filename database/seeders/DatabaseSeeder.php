@@ -2,7 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use Database\Seeders\PostSeeder;
+use App\Models\Tag;
+use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +18,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+
+        // Asegúrate de que el directorio se pueda crear
+
+        Storage::disk('public')->deleteDirectory('posts');
+        Storage::disk('public')->makeDirectory('posts');
+        
+        
+        $this->call(UserSeeder::class);
+        Category::factory(4)->create();
+        Tag::factory(8)->create();
+        $this->call(PostSeeder::class);
     }
 }
