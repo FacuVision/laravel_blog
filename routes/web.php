@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//controlador de recursos para todas las rutas de posts
+Route::resource('posts', PostController::class)->names("posts");
+
+Route::get('/', [PostController::class, "index"])->name("posts.index");
 
 Route::middleware([
     'auth:sanctum',
